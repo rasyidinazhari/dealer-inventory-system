@@ -91,13 +91,12 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import api from "../../services/api";
+import api, { BASE_URL } from "../../services/api";
 import PublicNavbar from "../../components/PublicNavbar.vue";
 import PublicFooter from "../../components/PublicFooter.vue";
 
 const articles = ref([]);
 const isLoading = ref(true);
-const BASE_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:5001";
 
 const getImageUrl = (url) => (url ? `${BASE_URL}${url}` : null);
 

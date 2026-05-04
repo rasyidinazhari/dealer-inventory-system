@@ -603,7 +603,7 @@
 </template>
 
 <script setup>
-import api from "../../services/api";
+import api, { BASE_URL } from "../../services/api";
 import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
@@ -631,8 +631,6 @@ const allPhotos = computed(() => {
 });
 
 const isLoading = ref(true);
-
-const BASE_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:5001";
 const DEALER_WA_NUMBER = "6281222444951"; // Ganti dengan nomor WhatsApp aslimu
 
 // --- State Kalkulator Simulasi ---

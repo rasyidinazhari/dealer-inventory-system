@@ -263,9 +263,8 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import api from "../../services/api";
+import api, { BASE_URL } from "../../services/api";
 
-const BASE_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:5001";
 const articles = ref([]);
 const isLoading = ref(true);
 const isModalOpen = ref(false);

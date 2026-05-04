@@ -349,6 +349,7 @@
 </template>
 
 <script setup>
+import { BASE_URL } from "../../services/api";
 import { ref, onMounted, computed, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import axios from "axios";
@@ -359,8 +360,6 @@ const route = useRoute();
 const router = useRouter();
 
 const DEALER_WA_NUMBER = "6281222444951";
-const BASE_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:5001";
-
 const isLoading = ref(true);
 const motors = ref([]);
 

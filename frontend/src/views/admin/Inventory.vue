@@ -907,7 +907,7 @@
                           >Faktur</span
                         >
                       </label>
-                      <label
+                      <!-- <label
                         class="flex items-center p-3 transition-colors border border-gray-200 cursor-pointer rounded-xl bg-white hover:bg-blue-50 hover:border-blue-200"
                       >
                         <input
@@ -919,7 +919,7 @@
                         <span class="ml-3 text-sm font-medium text-gray-800"
                           >Garansi</span
                         >
-                      </label>
+                      </label> -->
                     </div>
                   </div>
 
@@ -1025,7 +1025,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, computed, watch } from "vue";
-import api from "../../services/api";
+import api, { BASE_URL } from "../../services/api";
 
 // ==========================================
 // USER & ROLE STATE
@@ -1071,8 +1071,6 @@ const confirmTitle = ref("");
 const confirmMessage = ref("");
 const confirmAction = ref(null);
 const isConfirming = ref(false);
-
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
 
 const form = ref({
   sku_code: "",
