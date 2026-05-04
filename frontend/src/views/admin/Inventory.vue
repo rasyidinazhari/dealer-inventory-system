@@ -1113,7 +1113,10 @@ const formatCurrency = (val) =>
     minimumFractionDigits: 0,
   }).format(val);
 
-const getImageUrl = (url) => (url ? `${BASE_URL}${url}` : null);
+const getImageUrl = (url) => {
+  if (!url) return null;
+  return `${BASE_URL}${url}`;
+};
 
 // ==========================================
 // PENGAMBILAN DATA (API CALLS)

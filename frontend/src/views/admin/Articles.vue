@@ -277,7 +277,10 @@ const selectedImage = ref(null);
 
 const form = ref({ title: "", content: "", is_published: true });
 
-const getImageUrl = (url) => (url ? `${BASE_URL}${url}` : null);
+const getImageUrl = (url) => {
+  if (!url) return null;
+  return `${BASE_URL}${url}`;
+};
 
 const fetchArticles = async () => {
   try {

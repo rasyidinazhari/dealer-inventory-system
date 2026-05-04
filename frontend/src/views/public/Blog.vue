@@ -98,7 +98,10 @@ import PublicFooter from "../../components/PublicFooter.vue";
 const articles = ref([]);
 const isLoading = ref(true);
 
-const getImageUrl = (url) => (url ? `${BASE_URL}${url}` : null);
+const getImageUrl = (url) => {
+  if (!url) return null;
+  return `${BASE_URL}${url}`;
+};
 
 onMounted(async () => {
   try {

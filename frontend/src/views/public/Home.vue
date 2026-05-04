@@ -412,7 +412,7 @@ const formatCurrency = (value) => {
 
 const getImageUrl = (url) => {
   if (!url) return null;
-  return `${BASE_URL}${url}?t=${new Date().getTime()}`;
+  return `${BASE_URL}${url}`;
 };
 
 const waLinkGeneral = computed(() => {

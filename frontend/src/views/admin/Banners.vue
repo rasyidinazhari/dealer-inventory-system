@@ -207,7 +207,10 @@ const form = ref({
   order: 0,
 });
 
-const getImageUrl = (url) => `${BASE_URL}${url}?t=${new Date().getTime()}`;
+const getImageUrl = (url) => {
+  if (!url) return null;
+  return `${BASE_URL}${url}`;
+};
 
 const fetchBanners = async () => {
   isLoading.value = true;

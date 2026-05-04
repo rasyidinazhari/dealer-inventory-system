@@ -200,7 +200,10 @@ const relatedArticles = ref([]);
 const isLoading = ref(true);
 const copied = ref(false);
 
-const getImageUrl = (url) => (url ? `${BASE_URL}${url}` : null);
+const getImageUrl = (url) => {
+  if (!url) return null;
+  return `${BASE_URL}${url}`;
+};
 
 // Menghitung estimasi waktu baca (Asumsi kecepatan baca 200 kata/menit)
 const readingTime = computed(() => {

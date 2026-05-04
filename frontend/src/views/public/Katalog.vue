@@ -450,7 +450,7 @@ const formatCurrency = (value) => {
 
 const getImageUrl = (url) => {
   if (!url) return null;
-  return `${BASE_URL}${url}?t=${new Date().getTime()}`;
+  return `${BASE_URL}${url}`;
 };
 
 const getWaLink = (motor) => {
@@ -491,6 +491,7 @@ const syncFromUrl = () => {
 };
 
 // PANTAU PERUBAHAN STATE UNTUK DIKEMBALIKAN KE URL (Opsional agar URL bisa di-share)
+// 1. Yang sudah kamu punya: Menangani perubahan form Filter -> Update URL
 watch(
   filters,
   (newFilters) => {
@@ -504,6 +505,21 @@ watch(
     router.replace({ query }).catch(() => {});
   },
   { deep: true },
+);
+
+// 2. TAMBAHKAN INI: Menangani perubahan URL (dari Navbar) -> Update form Filter
+watch(
+  () => route.query.q,
+  (newQ) => {
+    // Jika ada kata kunci baru dari Navbar, masukkan ke dalam filter lokal
+    if (newQ !== undefined && newQ !== filters.value.q) {
+      filters.value.q = newQ;
+    }
+    // Jika URL bersih dari parameter 'q' (misal tombol back ditekan), kosongkan input
+    else if (!newQ && filters.value.q) {
+      filters.value.q = "";
+    }
+  },
 );
 
 const dynamicCategories = ref([]);

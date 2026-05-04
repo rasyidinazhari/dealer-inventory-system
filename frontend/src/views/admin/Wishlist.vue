@@ -139,7 +139,10 @@ const formatCurrency = (value) => {
   }).format(value || 0);
 };
 
-const getImageUrl = (url) => (url ? `${BASE_URL}${url}` : null);
+const getImageUrl = (url) => {
+  if (!url) return null;
+  return `${BASE_URL}${url}`;
+};
 
 const getWaLink = (item) => {
   return `https://wa.me/${DEALER_WA_NUMBER}?text=${encodeURIComponent(`Halo CS Abu Motor, saya tertarik dengan kendaraan dari wishlist saya: *${item.brand} ${item.model_name}* (Harga: ${formatCurrency(item.price)}). Apakah masih tersedia?`)}`;

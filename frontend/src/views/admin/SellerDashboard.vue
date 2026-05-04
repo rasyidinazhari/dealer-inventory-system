@@ -884,8 +884,10 @@ const formatCurrency = (value) =>
     currency: "IDR",
     minimumFractionDigits: 0,
   }).format(value || 0);
-const getImageUrl = (url) =>
-  url ? `${BASE_URL}${url}?t=${new Date().getTime()}` : null;
+const getImageUrl = (url) => {
+  if (!url) return null;
+  return `${BASE_URL}${url}`;
+};
 
 const fetchMotors = async () => {
   isLoading.value = true;
