@@ -1,4 +1,4 @@
-from app import create_app
+from backend.app.__init__local import create_app
 from backend.app.modelsbackup import db
 
 app = create_app()

@@ -3,11 +3,12 @@ import os
 from flask import Flask
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
-from dotenv import load_dotenv
+from dotenv import load_dotenv # <-- Import ini
 from .models import db
 
 # Load variabel dari file .env
 load_dotenv()
+
 
 def create_app():
     app = Flask(__name__)
@@ -15,22 +16,20 @@ def create_app():
 
     # File akan disimpan di backend/app/static/uploads
     UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'uploads')
-    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True) # Buat folder otomatis jika belum ada
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     
-    # ==========================================
-    # KONFIGURASI DATABASE (RENDER + SUPABASE)
-    # ==========================================
-    database_url = os.getenv('DATABASE_URL')
-    
-    # Perbaikan untuk SQLAlchemy 1.4+: harus menggunakan 'postgresql://' bukan 'postgres://'
-    if database_url and database_url.startswith("postgres://"):
-        database_url = database_url.replace("postgres://", "postgresql://", 1)
+    # Ganti dengan username, password, dan port PostgreSQL kamu
+    # Contoh di bawah menggunakan default postgres:
+    DB_USER = os.getenv('DB_USERNAME')
+    DB_PASS = os.getenv('DB_PASSWORD')
+    DB_HOST = os.getenv('DB_HOST')
+    DB_PORT = os.getenv('DB_PORT')
+    DB_NAME = os.getenv('DB_NAME')
 
-    # Jika DATABASE_URL tidak ditemukan (misal di lokal belum diset), fallback ke SQLite
-    app.config['SQLALCHEMY_DATABASE_URI'] = database_url or 'sqlite:///local_default.db'
+    # Konfigurasi koneksi PostgreSQL
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    
     # Konfigurasi JWT Secret Key
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
 
@@ -41,8 +40,8 @@ def create_app():
     # -------------------------------------
 
     with app.app_context():
-        # Saat pertama kali di-deploy ke Render, ini akan otomatis
-        # men-generate seluruh tabel kamu di dalam database Supabase.
+        # Karena kita pindah ke database baru, ini akan otomatis
+        # membuat semua tabel dari awal di PostgreSQL
         db.create_all() 
 
     # Registrasi Blueprints
@@ -67,4 +66,5 @@ def create_app():
     app.register_blueprint(articles_bp)
     app.register_blueprint(wishlist_bp)
 
+    
     return app
