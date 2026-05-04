@@ -1,0 +1,70 @@
+# =========================
+# 1. PYTHON / FLASK (BACKEND)
+# =========================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Virtual Environment
+venv/
+env/
+.venv/
+backend/venv/
+
+# Environment Variables (Rahasia, tidak boleh masuk GitHub!)
+.env
+.env.*
+.flaskenv
+backend/.env
+frontend/.env
+frontend/.env.*
+
+# Database Lokal (Agar database testing tidak menimpa production)
+*.db
+*.sqlite
+*.sqlite3
+instance/
+
+# Folder Upload Gambar (Kita tidak mau upload gambar testing ke server)
+backend/app/static/uploads/
+!backend/app/static/uploads/.gitkeep
+
+# =========================
+# 2. VUE.JS / VITE (FRONTEND)
+# =========================
+# Dependencies
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+.pnp
+.pnp.js
+
+# Build Output (File hasil compile)
+dist/
+dist-ssr/
+frontend/dist/
+frontend/dist-ssr/
+
+# Environment Variables Frontend
+.env.local
+.env.*.local
+
+# Log npm/yarn
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================
+# 3. OS & EDITOR (UMUM)
+# =========================
+.DS_Store
+**/.DS_Store
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
